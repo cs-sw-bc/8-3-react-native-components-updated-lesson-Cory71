@@ -3,7 +3,7 @@
 // Button is the simplest pressable component.
 // Alert opens a native OS dialog.
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 // TODO 1: Import Button and Alert from 'react-native'
 
@@ -11,6 +11,10 @@ export default function ButtonAndAlert() {
 
   // TODO 2: Write a handlePress function that calls Alert.alert()
   //         with a title, a message, and an OK button
+      function handlePress() {
+        Alert.alert('Hello!', 'Ouch that Hurt !.', [{ text: 'OK' },
+           { text: 'Cancel', style: 'cancel', onPress: () => Alert.alert('Cancel Pressed') }]);
+      }
 
   return (
     <View style={styles.container}>
@@ -20,7 +24,7 @@ export default function ButtonAndAlert() {
       </Text>
 
       {/* TODO 3: Add a Button with title="Show Alert" that calls handlePress */}
-
+      <Button title="Show Alert" onPress={handlePress} />
     </View>
   );
 }

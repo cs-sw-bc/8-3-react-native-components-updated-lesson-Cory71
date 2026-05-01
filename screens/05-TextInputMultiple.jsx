@@ -3,7 +3,7 @@
 // Store all field values in a single state object.
 
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 // TODO 1: Import TextInput from 'react-native'
 
@@ -11,22 +11,52 @@ export default function TextInputMultiple() {
 
   // TODO 2: Create a state object called 'form' with three fields:
   //         firstName: '', lastName: '', email: ''
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+  });
 
   // TODO 3: Write a handleChange(field, value) function that updates
   //         only the changed field using spread: { ...form, [field]: value }
+  const handleChange = (field, value) => {
+    setForm({ ...form, [field]: value });
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Sign Up</Text>
-
+       
       {/* TODO 4: Add a TextInput for firstName */}
-
+      <TextInput
+        value={form.firstName}
+        placeholder="First Name"
+        style={styles.input}
+        onChangeText={(value) => handleChange('firstName', value)}
+      />
       {/* TODO 5: Add a TextInput for lastName */}
-
+      <TextInput
+        value={form.lastName}
+        placeholder="Last Name"
+        style={styles.input}
+        onChangeText={(value) => handleChange('lastName', value)}
+      />
       {/* TODO 6: Add a TextInput for email
                   Use keyboardType="email-address" and autoCapitalize="none" */}
+      <TextInput
+        value={form.email}
+        placeholder="Email"
+        style={styles.input}
+        onChangeText={(value) => handleChange('email', value)}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
 
       {/* TODO 7: Show a preview box below with the full name and email */}
+      <View style={styles.preview}>
+        <Text style={styles.previewText}>Full Name: {form.firstName} {form.lastName}</Text>
+        <Text style={styles.previewText}>Email: {form.email}</Text>
+      </View>
     </View>
   );
 }
